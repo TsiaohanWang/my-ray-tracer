@@ -9,7 +9,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let mut img = Img::new_from(300, 200)?;
     let mut i = 0.0;
-    for _ in 0..6000 {
+    for _ in 0..60000 {
         let _ = img.append(i, i, i);
         i += 0.00001;
     }
