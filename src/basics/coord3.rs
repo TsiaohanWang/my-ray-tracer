@@ -1,6 +1,6 @@
-use std::{ops::Sub, vec};
+use std::ops::Sub;
 
-use crate::basics::{coord3, vec3::Vec3};
+use crate::basics::vec3::Vec3;
 
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct Coord3(f64, f64, f64);

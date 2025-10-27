@@ -1,6 +1,6 @@
 use super::texture::*;
-use crate::basics::{coord3::{self, Coord3}, ray::*, vec3::Vec3};
-use std::cmp::{Ordering, min};
+use crate::basics::{coord3::Coord3, ray::*, vec3::Vec3};
+use std::cmp::Ordering;
 
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 struct OpaqueSphere {

@@ -1,6 +1,8 @@
 use std::error::Error;
+use std::fmt::Display;
 
-use super::coord3::ORIGIN;
+use crate::errors::MainErr;
+
 use super::coord3::Coord3;
 use super::vec3::Vec3;
 
@@ -9,7 +11,7 @@ pub struct Ray {
     /// 光线的源点坐标
     origin: Coord3,
     /// 光线的射出方向
-    direction: Vec3
+    direction: Vec3,
 }
 
 impl Ray {
@@ -36,7 +38,23 @@ pub enum RayIntersectErr {
     /// 光线由不透明物体内部发出
     InnerRayErr,
     /// 计算时出现 f64::NaN 无效值
-    ExistsNaNErr(String),
+    RayIntersectNaNErr(MainErr),
     /// 二次方程的根（表示光线沿射出方向行进的时间）为负
     NegativeRootErr,
 }
+
+impl Display for RayIntersectErr {
+    /// 自定义 `RayIntersectErr` 错误提示信息
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::InnerRayErr => write!(f, "Ray Intersect Error: ray inside the object"),
+            Self::NegativeRootErr => write!(
+                f,
+                "Ray Intersect Error: quadratic equation has negative root"
+            ),
+            Self::RayIntersectNaNErr(e) => write!(f, "Ray Intersect Error: {:?}", e),
+        }
+    }
+}
+
+impl Error for RayIntersectErr {}
