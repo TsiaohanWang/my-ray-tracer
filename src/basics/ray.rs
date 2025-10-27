@@ -47,14 +47,20 @@ impl Display for RayIntersectErr {
     /// 自定义 `RayIntersectErr` 错误提示信息
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::InnerRayErr => write!(f, "Ray Intersect Error: ray inside the object"),
+            Self::InnerRayErr => write!(f, "ray inside the object"),
             Self::NegativeRootErr => write!(
                 f,
-                "Ray Intersect Error: quadratic equation has negative root"
+                "quadratic equation has negative root"
             ),
-            Self::RayIntersectNaNErr(e) => write!(f, "Ray Intersect Error: {:?}", e),
+            Self::RayIntersectNaNErr(e) => write!(f, "{}", e),
         }
     }
 }
 
 impl Error for RayIntersectErr {}
+
+impl RayIntersectErr {
+    pub fn handle(&self) {
+        eprintln!("[Ray Intersect Error] {}", self);
+    }
+}

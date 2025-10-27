@@ -15,8 +15,14 @@ impl MainErr {
 
 impl Display for MainErr {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Err({})", self.details)
+        write!(f, "Err[{}]", self.details)
     }
 }
 
 impl Error for MainErr {}
+
+impl MainErr {
+    pub fn handle(self) {
+        eprintln!("[Main Error] {}", self);
+    }
+}
