@@ -1,5 +1,6 @@
 use super::texture::*;
 use crate::basics::{coord3::Coord3, ray::*, vec3::Vec3};
+use std::error::Error;
 use std::cmp::Ordering;
 
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
@@ -27,11 +28,11 @@ impl OpaqueSphere {
 }
 
 impl RayIntersectOpaque for OpaqueSphere {
-    fn intersection(&self, ray: &Ray) -> Result<Option<Coord3>, RayIntersectErr> {
+    fn intersection(&self, ray: &Ray) -> Result<Option<Coord3>, Box<dyn Error>> {
         let oc_vec: &Vec3 = &(self.get_center() - ray.get_origin());
 
         if oc_vec.magnitude() < self.get_radius() {
-            return Err(RayIntersectErr::InnerRayErr);
+            return Err(Box::new(RayIntersectErr::InnerRayErr));
         }
 
         let a: f64 = ray.get_direction() * ray.get_direction();
@@ -53,7 +54,7 @@ impl RayIntersectOpaque for OpaqueSphere {
                 let t_root2: f64 = ((-b) + quad_eq_delta.sqrt()) / (2.0 * a);
 
                 if t_root1 < 0.0 || t_root2 < 0.0 {
-                    return Err(RayIntersectErr::NegativeRootErr);
+                    return Err(Box::new(RayIntersectErr::NegativeRootErr));
                 }
 
                 let min_root = match t_root1 < t_root2 {

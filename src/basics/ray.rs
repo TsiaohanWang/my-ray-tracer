@@ -16,6 +16,7 @@ pub struct Ray {
 
 impl Ray {
     pub fn new_from(origin: Coord3, direction: Vec3) -> Self {
+        let direction: Vec3 = direction.normalize();
         Self { origin, direction }
     }
 
@@ -30,7 +31,7 @@ impl Ray {
 
 pub trait RayIntersectOpaque {
     /// 光线与不透明物体的交点
-    fn intersection(&self, ray: &Ray) -> Result<Option<Coord3>, RayIntersectErr>;
+    fn intersection(&self, ray: &Ray) -> Result<Option<Coord3>, Box<dyn Error>>;
 }
 
 #[derive(Debug)]
