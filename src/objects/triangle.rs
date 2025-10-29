@@ -2,9 +2,9 @@ use std::{error::Error, fmt::Display};
 
 use crate::basics::{
     coord3::Coord3,
-    ray::{Ray, RayIntersectOpaque},
     vec3::*,
 };
+use crate::rays::ray::{Ray, RayIntersectOpaque};
 
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct OpaqueTriangle {

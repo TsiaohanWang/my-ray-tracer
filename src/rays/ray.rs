@@ -3,8 +3,8 @@ use std::fmt::Display;
 
 use crate::errors::MainErr;
 
-use super::coord3::Coord3;
-use super::vec3::Vec3;
+use crate::basics::coord3::Coord3;
+use crate::basics::vec3::Vec3;
 
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct Ray {

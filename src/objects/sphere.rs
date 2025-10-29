@@ -1,5 +1,6 @@
 use super::texture::*;
-use crate::basics::{coord3::Coord3, ray::*, vec3::Vec3};
+use crate::basics::{coord3::Coord3, vec3::Vec3};
+use crate::rays::ray::{Ray, RayIntersectOpaque, RayIntersectErr};
 use std::error::Error;
 use std::cmp::Ordering;
 

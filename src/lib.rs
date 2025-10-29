@@ -1,5 +1,4 @@
 pub mod basics;
 pub mod errors;
+pub mod rays;
 pub mod objects;
-
-use basics::coord3::Coord3;
